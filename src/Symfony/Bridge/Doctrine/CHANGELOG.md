@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+5.4
+---
+
+ * Add `disable_clear` option to DoctrineType form fields to optionally disable clear and allow UnitOfWork to include data from cleared collections.
+
 5.3
 ---
 

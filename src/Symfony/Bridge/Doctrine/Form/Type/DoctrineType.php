@@ -106,9 +106,13 @@ abstract class DoctrineType extends AbstractType implements ResetInterface
     {
         if ($options['multiple'] && interface_exists(Collection::class)) {
             $builder
-                ->addEventSubscriber(new MergeDoctrineCollectionListener())
                 ->addViewTransformer(new CollectionToArrayTransformer(), true)
             ;
+            if(!$options['disable_clear']) {
+                $builder
+                    ->addEventSubscriber(new MergeDoctrineCollectionListener())
+                ;
+            }
         }
     }
 
@@ -218,6 +222,7 @@ abstract class DoctrineType extends AbstractType implements ResetInterface
             'choice_value' => $choiceValue,
             'id_reader' => null, // internal
             'choice_translation_domain' => false,
+            'disable_clear' => false,
         ]);
 
         $resolver->setRequired(['class']);
